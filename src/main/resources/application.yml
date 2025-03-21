@@ -43,8 +43,6 @@ cbs:
 scoring:
   engine:
     url: https://scoringtest.credable.io/api/v1
-    register:
-      url: https://scoringtest.credable.io/api/v1/client/createClient
 
 logging:
   level:

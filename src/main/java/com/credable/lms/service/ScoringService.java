@@ -19,8 +19,8 @@ public class ScoringService {
     private final ScoringEngineService scoringEngineService;
     private final ClientRegistrationRepository clientRegistrationRepository;
 
-    @Value("${scoring.engine.register.url}")
-    private String registerUrl;
+    @Value("${scoring.engine.url}")
+    private String baseUrl;
 
     public ScoringService(RestTemplate restTemplate, ScoringEngineService scoringEngineService, ClientRegistrationRepository clientRegistrationRepository) {
         this.restTemplate = restTemplate;
@@ -32,6 +32,7 @@ public class ScoringService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        String registerUrl = baseUrl + "/client/createClient";
         ClientRegistrationRequest request = new ClientRegistrationRequest(endpointUrl, name, username, password);
         HttpEntity<ClientRegistrationRequest> entity = new HttpEntity<>(request, headers);
 
