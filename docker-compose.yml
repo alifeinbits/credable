@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  lms-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lms-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - CBS_KYC_URL=https://kycapitest.credable.io/service/customerWsdl.wsdl
+      - CBS_KYC_USERNAME=admin
+      - CBS_KYC_PASSWORD=pwd123
+      - CBS_TRANSACTION_URL=https://trxapitest.credable.io/service/transactionWsdl.wsdl
+      - CBS_TRANSACTION_USERNAME=admin
+      - CBS_TRANSACTION_PASSWORD=pwd123
+      - SCORING_BASE_URL=https://scoringtest.credable.io/api/v1
+      - SCORING_RETRY_MAX_ATTEMPTS=5
+      - SCORING_RETRY_DELAY_MS=5000
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - lms-network
+
+  lms-db:
+    image: postgres:14-alpine
+    container_name: lms-db
+    environment:
+      - POSTGRES_DB=lms
+      - POSTGRES_USER=lmsuser
+      - POSTGRES_PASSWORD=lmspassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - lms-data:/var/lib/postgresql/data
+    networks:
+      - lms-network
+
+networks:
+  lms-network:
+    driver: bridge
+
+volumes:
+  lms-data:

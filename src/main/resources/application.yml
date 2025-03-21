@@ -1,0 +1,63 @@
+server:
+  port: 8080
+#  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: loan-management-system
+
+  datasource:
+    url: jdbc:h2:mem:lmsdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      platform: h2
+  web:
+    resources:
+          add-mappings: false
+
+
+# SOAP API Configurations
+cbs:
+  username: admin
+  password: pwd123
+  kyc:
+    url: https://kycapitest.credable.io/service/customerWsdl.wsdl
+  transactions:
+    url: https://trxapitest.credable.io/service/transactionWsdl.wsdl
+
+# Scoring Engine Configurations
+scoring:
+  engine:
+    url: https://scoringtest.credable.io/api/v1
+    client-token: your-client-token
+    register:
+      url: https://scoringtest.credable.io/api/v1/client/createClient
+
+logging:
+  level:
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+    version: openapi_3_0
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    version: "2.0"
+
