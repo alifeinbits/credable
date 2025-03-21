@@ -1,5 +1,6 @@
 package com.credable.lms.model;
 
+import com.credable.lms.integration.cbs.kyc.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,8 @@ import lombok.*;
 @Getter
 @Setter
 @Table(name = "customers")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +19,11 @@ public class Customer {
     @Column(unique = true, nullable = false)
     private String customerNumber;
 
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private String email;
     private String phoneNumber;
-    CustomerStatus status;
-
-    public Customer() {}
-
-    public Customer(String customerNumber, String name, String phoneNumber) {
-        this.customerNumber = customerNumber;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
+    Status status;
 
 }

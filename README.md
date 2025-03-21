@@ -58,11 +58,13 @@ mvn clean package
 docker-compose up -d
 ```
 
+Change DB configs if using docker.
+
 ### Running Locally
 
 ```bash
 # Start the application
-java -jar target/loan-management-system.jar
+java -jar target/loan-management-system-1.0.0.jar
 ```
 
 ## Configuration

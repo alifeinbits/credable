@@ -17,8 +17,4 @@ public class CustomerService {
         return customerRepository.findByCustomerNumber(customerNumber)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
     }
-
-    public Customer saveCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
 }
