@@ -35,7 +35,7 @@ public class LoanController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing client-id header");
         }
         // Process the loan request
-        Loan loan = loanService.requestLoan(customerNumber, amount);
+        Loan loan = loanService.requestLoan(customerNumber, amount, Long.valueOf(clientId));
         return ResponseEntity.ok(loan);
     }
 }

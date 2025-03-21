@@ -18,6 +18,7 @@ public class Customer {
 
     private String name;
     private String phoneNumber;
+    CustomerStatus status;
 
     public Customer() {}
 

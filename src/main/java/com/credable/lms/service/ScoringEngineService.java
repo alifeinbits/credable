@@ -17,17 +17,15 @@ public class ScoringEngineService {
     @Value("${scoring.engine.url}")
     private String scoringEngineUrl;
 
-    @Value("${scoring.engine.client-token}")
-    private String clientToken;
 
     public ScoringEngineService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public String initiateQueryScore(String customerNumber) {
+    public String initiateQueryScore(String customerNumber,String token) {
         String url = scoringEngineUrl + "/scoring/initiateQueryScore/" + customerNumber;
         HttpHeaders headers = new HttpHeaders();
-        headers.set("client-token",clientToken);
+        headers.set("client-token",token);
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
         return response.getBody();

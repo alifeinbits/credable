@@ -43,7 +43,6 @@ cbs:
 scoring:
   engine:
     url: https://scoringtest.credable.io/api/v1
-    client-token: your-client-token
     register:
       url: https://scoringtest.credable.io/api/v1/client/createClient
 

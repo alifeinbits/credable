@@ -3,6 +3,7 @@ package com.credable.lms.service;
 import com.credable.lms.exception.BusinessException;
 import com.credable.lms.exception.KycServiceException;
 import com.credable.lms.model.Customer;
+import com.credable.lms.model.CustomerStatus;
 import com.credable.lms.repository.CustomerRepository;
 import com.credable.lms.response.KycResponse;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,10 @@ public class SubscriptionService {
 
         // Save customer in the database
         Customer customer = new Customer();
+        customer.setName(kycResponse.getName());
+        customer.setPhoneNumber(kycResponse.getPhoneNumber());
         customer.setCustomerNumber(customerNumber);
+        customer.setStatus(CustomerStatus.ACTIVE);
         customerRepository.save(customer);
 
         return "Customer " + customerNumber + " subscribed successfully.";
